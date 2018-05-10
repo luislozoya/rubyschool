@@ -63,6 +63,21 @@ class EventsController < ApplicationController
 
   def register
     #@event = Event.find(params[:id])
+    @users_of_event = @event.users
+  end
+
+  def register_user
+    @event = Event.find(params[:id])
+    email = params[:email]
+    user = User.where(email: email).take
+    unless user.nil?
+      @event.users << user
+    end  
+    redirect_to register_to_event_path(@event)
+    #hay que validar en el controlador ver lo que pasa cuando se pone un correo que no es
+    #si lo saco bien que diga el usuario se agrego y si lo saca mal que diga el usuario no se puede agregar
+    # que diga imposible agregar el usuario
+    #validar que exista el usuario y que no este repetido
   end
 
   private
