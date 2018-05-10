@@ -3,4 +3,7 @@ Rails.application.routes.draw do
 
   #get "/events", to:"events#index"
   resources :events
+  get 'events/:id/register', to: 'events#register', as: 'register_to_event'
+
+  resources :users
 end
